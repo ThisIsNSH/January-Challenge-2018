@@ -1,0 +1,8 @@
+s=str(raw_input())
+s="".join(sorted([s[j:k] for j in range(len(s)) for k in range(j+1,len(s)+1)]))
+g=0
+for i in range(int(raw_input())):
+    b=list(map(int,raw_input().strip().split()))
+    k=((b[0]*g)%b[1])+1
+    g+=ord(s[k-1])
+    print s[k-1]
