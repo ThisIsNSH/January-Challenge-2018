@@ -1,16 +1,41 @@
-def maxSubArraySum(a,size):
-     
-    max_so_far =a[0]
-    curr_max = a[0]
-     
-    for i in range(1,size):
-        curr_max = max(a[i], curr_max + a[i])
-        max_so_far = max(max_so_far,curr_max)
-         
-    return max_so_far
 
 for _ in range(int(raw_input())):
     n,k=map(int,raw_input().strip().split())
-    a=list(map(int,raw_input().strip().split()))
-    b=a*k
-    print maxSubArraySum(b,len(b))
+    l=(list(map(int,raw_input().strip().split())))
+    a = l[0]
+    b = l[0]    
+    if all(i<=0 for i in l):
+        print max(l)
+    else:
+        if k==1:
+
+            for i in range(1,len(l)):
+                a = max(l[i], a + l[i])
+                b = max(b,a)
+            print b
+        
+
+        else:
+            for i in range(1,len(l)):
+                a = max(l[i], a + l[i])
+                b = max(b,a)
+            
+            j1,s=l[0],l[0]
+            j2,s1=l[-1],l[-1]
+            for i in range(1,len(l)):
+                s+=l[i]
+                s1+=l[-(i+1)]
+
+                if s>j1:
+                    j1=s
+                if s1>j2:
+                    j2=s1
+            if sum(l)>0:
+                print j1+j2+sum(l)*(k-2)
+            else:
+                print max(b,j1+j2)
+
+
+
+
+
