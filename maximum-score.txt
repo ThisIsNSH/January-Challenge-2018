@@ -1,0 +1,25 @@
+
+def nsh(i,j,x,sum1,l,count,n):
+    for k in range(j,-1,-1):
+        if l[i][k]<x:
+            x=l[i][k]
+            sum1+=x
+            count+=1
+            if count==n:
+                return sum1
+            
+            return nsh(i-1,j,x,sum1,l,count,n)
+    
+    return "-1"
+        
+
+for _ in range(int(raw_input())):
+    n=int(raw_input())
+    l=[]
+    for m in range(n):
+        l.append(sorted(list(map(int,raw_input().split()))))
+    if n==1:
+        print l[0][0]
+    else:
+        print nsh(n-2,n-1,l[-1][-1],l[-1][-1],l,1,n)
+    
