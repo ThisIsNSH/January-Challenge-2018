@@ -1,0 +1,93 @@
+from itertools import groupby
+from itertools import product
+
+def ncsub(seq, s=0):
+    
+    if seq:
+        x = seq[:1]
+        xs = seq[1:]
+        p2 = s % 2
+        p1 = not p2
+        return [x + ys for ys in ncsub(xs, s + p1)] + ncsub(xs, s + p2)
+    else:
+        return [[]] if s >= 3 else []
+
+for _ in range(int(raw_input())):
+    a,b=map(int,raw_input().split())
+    s1=list(raw_input())
+    s2=list(raw_input())
+    
+    c=0
+    s3=[x[0] for x in groupby(s1)]
+    s4=[x[0] for x in groupby(s2)]
+   
+    
+    if len(s3)>=len(s4):
+        s1=s3
+        s2=s4
+    else:
+        s1=s4
+        s2=s3
+        
+             
+    
+    '''
+    
+    
+    if len(s1)>=len(s2):
+        x=0
+        for i in s2:
+            
+            if i in s1[x:]:
+                
+                if 
+                x+=s1[x:].index(i)+1
+                s1.insert(x,i) 
+            else:
+                if x==0:
+                    s1.insert(x,i)
+                    
+                else:
+                    x+=1
+                    s1.insert(x,i)
+                    
+                    
+                    
+                    
+        for t in range(len(s1)-1):
+            if s1[t]!=s1[t+1]:
+                c+=1
+        print c+1
+        '''
+   
+    l=[ i for i in s2 if i in s1]
+    l1=[ j for j in s1 if j in l]
+
+    m=[]        
+    
+    if a<2000 and b<2000:
+        c=[l[i:j+1] for i in range(len(l) ) for j in range(i,len(l) )  ]
+    else:
+        c=[l[i:j+1] for i in range(len(l) ) for j in range(i,len(l) ) if len(l[i:j+1])>len(l)/4]
+    for x in sorted(ncsub(l)+c,key=len,reverse=True):
+        if x not in m:
+            m.append(x)
+    e=0
+    for x in m:
+        a=l1
+        if e>=len(x):
+            break
+        d=0
+        
+        for y in x:
+            
+            if y in a:
+                d+=1
+                i=a.index(y)
+                a=a[i+1:]
+                
+        e=max(e,d)
+    
+    print len(s1)+len(s2)-e
+                
+        
